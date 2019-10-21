@@ -11,17 +11,18 @@ class App extends Component {
   }
   
   componentDidMount() {
+    var proxy = 'https://cors-anywhere.herokuapp.com/';
+    const API_KEY = '29b741d85079c9ed7a103d693993129a';
     axios.get('https://ipapi.co/json/')
       .then(res => {
         this.setState({ location : res.data });
-        console.log(res.data)
-      });
-
-    const API_KEY = '29b741d85079c9ed7a103d693993129a';
-    axios.get(`https://api.darksky.net/forecast/${API_KEY}/34.0121,-117.6883`)
+        console.log(res.data);
+        return axios.get(`${proxy}https://api.darksky.net/forecast/${API_KEY}/${res.data.latitude},${res.data.longitude}`)
+      })
       .then(res => {
         console.log(res.data)
-      });
+      })
+
     /* Geolocation API 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -42,7 +43,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {this.state.location.latitude}, {this.state.location.longitude}
       </div>
     );
   }
