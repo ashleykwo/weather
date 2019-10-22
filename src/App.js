@@ -1,27 +1,37 @@
 import React, { Component } from 'react';
 import './App.css';
+
 import axios from 'axios';
+
+import CurrentWeather from './components/CurrentWeather/CurrentWeather';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      location: {}
+      location: {},
+      currentWeather: {}
     }
+
+    console.log(this.state);
   }
   
   componentDidMount() {
+    const proxy = 'https://cors-anywhere.herokuapp.com/';
+    const API_KEY = '29b741d85079c9ed7a103d693993129a';
     axios.get('https://ipapi.co/json/')
       .then(res => {
+        console.log(res.data);
         this.setState({ location : res.data });
-        console.log(res.data)
+        return axios.get(`${proxy}https://api.darksky.net/forecast/${API_KEY}/${res.data.latitude},${res.data.longitude}`)
+      })
+      .then(res => {
+        console.log(res.data);
+        const newState = {...this.state};
+        newState.currentWeather = res.data.currently;
+        this.setState({...newState})
       });
 
-    const API_KEY = '29b741d85079c9ed7a103d693993129a';
-    axios.get(`https://api.darksky.net/forecast/${API_KEY}/34.0121,-117.6883`)
-      .then(res => {
-        console.log(res.data)
-      });
     /* Geolocation API 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -42,7 +52,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {this.state.location.latitude}, {this.state.location.longitude}
+        {/*
+        {this.state.location.latitude}<br />
+        {this.state.currentWeather.temperature}<br />
+        {this.state.currentWeather.temperature}
+        */}
+        <CurrentWeather location={this.state.location} weather={this.state.weather}></CurrentWeather>
       </div>
     );
   }
