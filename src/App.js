@@ -27,10 +27,20 @@ class App extends Component {
       })
       .then(res => {
         //console.log(res.data);
-        console.log(res.data.hourly.data[0]);
+        console.log(res.data.hourly.data.slice(0, 5).map((item) => ({
+          time: item.time,
+          rainProbability: Math.round(item.precipProbability * 100),
+          temperature: Math.round(item.temperature),
+          icon: item.icon
+        })));
         const newState = {...this.state};
         newState.currentWeather = res.data.currently;
-        newState.hourlyForecast = res.data.hourly;
+        newState.hourlyForecast = res.data.hourly.data.slice(0, 5).map((item) => ({
+          time: item.time,
+          rainProbability: Math.round(item.precipProbability * 100),
+          temperature: Math.round(item.temperature),
+          icon: item.icon
+        }));
         newState.dailyForecast = res.data.daily;
         this.setState({...newState})
       });
@@ -62,6 +72,7 @@ class App extends Component {
         */}
         <CurrentWeather location={ this.state.location } currently={ this.state.currentWeather }></CurrentWeather>
         <HourlyForecast hourly={ this.state.hourlyForecast }></HourlyForecast>
+        <img src="https://darksky.net/dev/img/attribution/poweredby.png" alt="Powered by Dark Sky" />
       </div>
     );
   }

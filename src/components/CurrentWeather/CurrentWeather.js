@@ -1,5 +1,6 @@
 import React from 'react';
-import WeatherIcons from './WeatherIcons';
+import WeatherIcons from '../WeatherIcons/WeatherIcons';
+import './CurrentWeather.css';
 
 const currentWeather = (props) => {
   const { location } = props; // props.location
@@ -18,7 +19,7 @@ const currentWeather = (props) => {
       <p>{ dayOfWeek }</p>
       <p>{ month } { day }</p>
       <p>{ time }</p>
-      <WeatherIcons currently={ currently }></WeatherIcons>
+      <WeatherIcons weather={ currently.icon }></WeatherIcons>
     </div>
   )
 }

@@ -12,7 +12,7 @@ import Snow from '../../assets/Cloud-Snow.svg';
 
 const weatherIcons = (props) => {
   let icon = null;
-  switch(`${props.currently.icon}`) {
+  switch(`${props.weather}`) {
     case "clear-day":
       icon = ClearDay;
       break;
@@ -48,9 +48,7 @@ const weatherIcons = (props) => {
       break;
   }
   return (
-    <div>
-      <img src={icon} alt={props.currently.summary} />
-    </div>
+    <img src={icon} alt={props.weather} />
   )
 }
 

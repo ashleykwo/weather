@@ -3,3 +3,7 @@
   box-sizing: border-box;
   border-radius: 1rem;
 }
+
+img {
+  width: 10rem;
+}
