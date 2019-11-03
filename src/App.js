@@ -14,26 +14,23 @@ class App extends Component {
       location: {},
       currentWeather: {},
       hourlyForecast: {},
-      dailyForecast: {}
+      dailyForecast: {},
+      timeZone: ""
     }
   }
   
   componentDidMount() {
     const proxy = 'https://cors-anywhere.herokuapp.com/';
     const API_KEY = '29b741d85079c9ed7a103d693993129a';
+
     axios.get('https://ipapi.co/json/')
       .then(res => {
         this.setState({ location : res.data });
         return axios.get(`${proxy}https://api.darksky.net/forecast/${API_KEY}/${res.data.latitude},${res.data.longitude}`)
       })
       .then(res => {
-        //console.log(res.data);
-        console.log(res.data.hourly.data.slice(0, 5).map((item) => ({
-          time: item.time,
-          rainProbability: Math.round(item.precipProbability * 100),
-          temperature: Math.round(item.temperature),
-          icon: item.icon
-        })));
+        console.log(res.data.timezone);
+        console.log(res.data.currently)
         const newState = {...this.state};
         newState.currentWeather = res.data.currently;
         newState.hourlyForecast = res.data.hourly.data.slice(0, 5).map((item) => ({
@@ -43,6 +40,7 @@ class App extends Component {
           icon: item.icon
         }));
         newState.dailyForecast = res.data.daily;
+        newState.timeZone = res.data.timezone;
         this.setState({...newState})
       });
 
@@ -68,10 +66,8 @@ class App extends Component {
       <div className="App">
         <SearchBar></SearchBar>
         <CurrentWeather location={ this.state.location } currently={ this.state.currentWeather }></CurrentWeather>
-        <HourlyForecast hourly={ this.state.hourlyForecast }></HourlyForecast>
-        <footer>
-          <img src="https://darksky.net/dev/img/attribution/poweredby.png" alt="Powered by Dark Sky" />
-        </footer>
+        <HourlyForecast timezone={ this.state.timeZone } hourly={ this.state.hourlyForecast }></HourlyForecast>
+        <img src="https://darksky.net/dev/img/attribution/poweredby.png" alt="Powered by Dark Sky" />
       </div>
     );
   }
