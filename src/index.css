@@ -8,6 +8,7 @@ html {
 }
 
 body {
+  min-height: 100vh;
   background: linear-gradient(to bottom right, #00ced1, #5698d7);
   background-repeat: no-repeat;
   background-position: cover;
