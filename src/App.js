@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import CurrentWeather from './components/CurrentWeather/CurrentWeather';
 import HourlyForecast from './components/HourlyForecast/HourlyForecast';
+import SearchBar from './components/SearchBar/SearchBar';
 
 class App extends Component {
   constructor(props) {
@@ -65,14 +66,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {/*
-        {this.state.location.latitude}<br />
-        {this.state.currentWeather.temperature}<br />
-        {this.state.currentWeather.temperature}
-        */}
+        <SearchBar></SearchBar>
         <CurrentWeather location={ this.state.location } currently={ this.state.currentWeather }></CurrentWeather>
         <HourlyForecast hourly={ this.state.hourlyForecast }></HourlyForecast>
-        <img src="https://darksky.net/dev/img/attribution/poweredby.png" alt="Powered by Dark Sky" />
+        <footer>
+          <img src="https://darksky.net/dev/img/attribution/poweredby.png" alt="Powered by Dark Sky" />
+        </footer>
       </div>
     );
   }

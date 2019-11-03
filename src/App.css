@@ -4,6 +4,8 @@
   border-radius: 1rem;
 }
 
-img {
+footer img {
   width: 10rem;
+  display: block;
+  margin: 0 auto;
 }
