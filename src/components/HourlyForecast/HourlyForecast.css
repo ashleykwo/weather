@@ -1,0 +1,29 @@
+.hourly {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.hourly:not(:last-child) {
+  border-bottom: 1px solid #EEE;
+}
+
+.hourly > * {
+  flex: 1;
+}
+
+.time {
+  width: 5rem;
+
+}
+
+.icon img {
+  display: block;
+  width: 5rem;
+  margin: 0 auto;
+}
+
+.temp {
+  text-align: right;
+}

@@ -3,9 +3,11 @@ import './App.css';
 
 import axios from 'axios';
 
+import SearchBar from './components/SearchBar/SearchBar';
 import CurrentWeather from './components/CurrentWeather/CurrentWeather';
 import HourlyForecast from './components/HourlyForecast/HourlyForecast';
-import SearchBar from './components/SearchBar/SearchBar';
+import DailyForecast from './components/DailyForecast/DailyForecast';
+import Footer from './components/Footer/Footer';
 
 class App extends Component {
   constructor(props) {
@@ -27,22 +29,20 @@ class App extends Component {
         return axios.get(`${proxy}https://api.darksky.net/forecast/${API_KEY}/${res.data.latitude},${res.data.longitude}`)
       })
       .then(res => {
-        //console.log(res.data);
-        console.log(res.data.hourly.data.slice(0, 5).map((item) => ({
-          time: item.time,
-          rainProbability: Math.round(item.precipProbability * 100),
-          temperature: Math.round(item.temperature),
-          icon: item.icon
-        })));
+        console.log(res.data.daily);
         const newState = {...this.state};
         newState.currentWeather = res.data.currently;
         newState.hourlyForecast = res.data.hourly.data.slice(0, 5).map((item) => ({
           time: item.time,
-          rainProbability: Math.round(item.precipProbability * 100),
           temperature: Math.round(item.temperature),
           icon: item.icon
+        }));        
+        newState.dailyForecast = res.data.daily.data.slice(1, 6).map((item) => ({
+          time: item.time,
+          apparentHigh: Math.round(item.apparentTemperatureHigh),
+          apparentLow: Math.round(item.apparentTemperatureLow),
+          icon: item.icon
         }));
-        newState.dailyForecast = res.data.daily;
         this.setState({...newState})
       });
 
@@ -69,9 +69,8 @@ class App extends Component {
         <SearchBar></SearchBar>
         <CurrentWeather location={ this.state.location } currently={ this.state.currentWeather }></CurrentWeather>
         <HourlyForecast hourly={ this.state.hourlyForecast }></HourlyForecast>
-        <footer>
-          <img src="https://darksky.net/dev/img/attribution/poweredby.png" alt="Powered by Dark Sky" />
-        </footer>
+        <DailyForecast daily={ this.state.dailyForecast }></DailyForecast>
+        <Footer></Footer>
       </div>
     );
   }

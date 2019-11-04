@@ -15,11 +15,11 @@ const currentWeather = (props) => {
   const time = `${(date.getHours() > 12) ? (date.getHours() - 12) : (date.getHours())}:${(date.getMinutes() < 10) ? `0${date.getMinutes()}` : date.getMinutes()} ${(date.getHours() >= 12) ? 'PM' : 'AM'}`;
   return (
     <div className="container">
-      <p>{ location.city }, { location.region_code } { location.postal }</p>
-      <p>{ dayOfWeek }</p>
-      <p>{ month } { day }</p>
+      <p>{ dayOfWeek }, { month } { day }</p>
       <p>{ time }</p>
       <WeatherIcons weather={ currently.icon }></WeatherIcons>
+      <p> { Math.round(currently.temperature) }&#176;</p>
+      <p>{ location.city }, { location.region_code }</p>
     </div>
   )
 }
