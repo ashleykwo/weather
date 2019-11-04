@@ -29,7 +29,6 @@ class App extends Component {
         return axios.get(`${proxy}https://api.darksky.net/forecast/${API_KEY}/${res.data.latitude},${res.data.longitude}`)
       })
       .then(res => {
-        console.log(res.data.daily);
         const newState = {...this.state};
         newState.currentWeather = res.data.currently;
         newState.hourlyForecast = res.data.hourly.data.slice(0, 5).map((item) => ({
