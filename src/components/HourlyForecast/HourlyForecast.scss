@@ -3,19 +3,18 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-}
 
-.hourly:not(:last-child) {
-  border-bottom: 1px solid #EEE;
-}
+  &:not(:last-child) {
+    border-bottom: 1px solid #EEE;
+  }
 
-.hourly > * {
-  flex: 1;
+  & > * {
+    flex: 1;
+  }
 }
 
 .time {
   width: 5rem;
-
 }
 
 .icon img {

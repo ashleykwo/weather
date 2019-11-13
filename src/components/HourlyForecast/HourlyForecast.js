@@ -2,7 +2,7 @@ import React from 'react';
 
 import WeatherIcons from '../WeatherIcons/WeatherIcons';
 
-import './HourlyForecast.css';
+import './HourlyForecast.scss';
 
 const hourlyForecast = (props) => {
   return(

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { GoogleApiWrapper } from 'google-maps-react';
 
-import './SearchBar.css';
+import './SearchBar.scss';
 
 import PartlyCloudyDay from '../../assets/Cloud-Sun.svg';
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.scss';
 
 import axios from 'axios';
 
@@ -45,12 +45,12 @@ class App extends Component {
         console.log(res);
         const newState = {...this.state};
         newState.currentWeather = res.data.currently;
-        newState.hourlyForecast = res.data.hourly.data.slice(0, 5).map((item) => ({
+        newState.hourlyForecast = res.data.hourly.data.slice(0, 13).map((item) => ({
           time: item.time,
           temperature: Math.round(item.temperature),
           icon: item.icon
         }));        
-        newState.dailyForecast = res.data.daily.data.slice(1, 6).map((item) => ({
+        newState.dailyForecast = res.data.daily.data.slice(1, 8).map((item) => ({
           time: item.time,
           apparentHigh: Math.round(item.apparentTemperatureHigh),
           apparentLow: Math.round(item.apparentTemperatureLow),

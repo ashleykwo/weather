@@ -1,6 +1,6 @@
 import React from 'react';
 import WeatherIcons from '../WeatherIcons/WeatherIcons';
-import './CurrentWeather.css';
+import './CurrentWeather.scss';
 
 const currentWeather = (props) => {
   const { location } = props; // props.location

@@ -19,6 +19,7 @@ app.get('/api/weather/:latitude,:longitude', (req, res) => {
     .then(response => {
       res.send(response.data)
     })
+    .catch(err => console.log(err))
 });
 
 app.listen(PORT, () => console.log(`Server running on PORT ${PORT}`));
